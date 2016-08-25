@@ -7,7 +7,7 @@ and max temperature, information about the wind and clouds and the current tempe
 This application was developed to get started with node and learn more about how node works.
 
 ## Usage
-To use this weather application you just have to navigate to the poject folder and type 
+To use this weather application you just have to navigate to the project folder and type: 
 
 ```
 node weather.js stuttgart
