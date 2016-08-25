@@ -9,7 +9,6 @@ function printMessage(city, description, temperature,tempMin, tempMax, wind, clo
             ' m/s and clouds covering ' + clouds + '% of the sky.' +
             ' The max Temperature today was ' + tempMax + ' degrees Celsius' +
             ' and the min temperature was ' + tempMin + ' degrees Celsius.';
-    console.log(message);
 }
 
 //Print out error
