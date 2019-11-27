@@ -1,37 +1,33 @@
 // OpenWeatherMap API http://openweathermap.org/API
-var http = require('http');
+const http = require('http');
 
 // Print out message
-function printMessage(city, description, temperature,tempMin, tempMax, wind, clouds){
-    var message = 'Currently, ' + city + ' has ' + description + 
-            ', a temperature of ' + temperature + ' degrees Celsius' +
-            ', a wind speed of ' + wind + 
-            ' m/s and clouds covering ' + clouds + '% of the sky.' +
-            ' The max Temperature today was ' + tempMax + ' degrees Celsius' +
-            ' and the min temperature was ' + tempMin + ' degrees Celsius.';
-}
+const printMessage = (city, description, temperature,tempMin, tempMax, wind, clouds) => {
+  const message = `Currently, ${city} has ${description}, a temperature of ${temperature} degrees Celsius, a wind speed of ${wind} m/s and clouds covering ${clouds}% of the sky. The max Temperature today was ${tempMax} degrees Celsius and the min temperature was ${tempMin} degrees Celsius.`;
+  
+  console.log(message);
+};
 
 //Print out error
-function printError(error){
-    console.error(error.message);
-}
+const printError = (error) => console.error(error.message);
 
-function getWeather(city){
+const getWeather = (city) => {
     // API Key
-    var key = '';
+    const API_KEY = '';
+    const BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?q=';
 
     // Connect to the API
-    var request = http.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&APPID=' + key, function(response){
-        var body = '';
+    const request = http.get(`${BASE_URL}${city}&units=metric&APPID=${API_KEY}`, response => {
+        let body = '';
         // Read data
-        response.on('data', function(chunk){
+        response.on('data', chunk => {
             body += chunk;
         });
-        response.on('end', function(){
+        response.on('end', () => {
           if (response.statusCode === 200) {
             try {
             // Parse the data
-            var weather = JSON.parse(body);
+            const weather = JSON.parse(body);
             // Print the data
             printMessage(weather.name, weather.weather[0].description, weather.main.temp.toFixed(1),
             weather.main.temp_min, weather.main.temp_max, weather.wind.speed, weather.clouds.all);
@@ -48,5 +44,5 @@ function getWeather(city){
     request.on('error', printError);
 }
 
-var city = process.argv.slice(2);
+const city = process.argv.slice(2);
 getWeather(city);
