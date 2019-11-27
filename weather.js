@@ -18,7 +18,7 @@ function printError(error){
 
 function getWeather(city){
     // API Key
-    var key = '32dcecf64758538772770c237d4eec22';
+    var key = '';
 
     // Connect to the API
     var request = http.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&APPID=' + key, function(response){
